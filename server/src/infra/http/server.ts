@@ -1,8 +1,11 @@
 import { env } from '@/env'
 import { fastifyCors } from '@fastify/cors'
+import { fastifySwagger } from '@fastify/swagger'
+import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import { fastify } from 'fastify'
 import {
   hasZodFastifySchemaValidationErrors,
+  jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
@@ -32,6 +35,27 @@ server.setErrorHandler((error, request, reply) => {
 })
 
 server.register(fastifyCors, { origin: '*' })
+
+server.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: 'Brev.ly',
+      description: 'API para gerenciamento de encurtamento de URLs',
+      version: '1.0.0',
+    },
+    servers: [
+      {
+        url: `http://localhost:${env.PORT}`,
+        description: 'Servidor de desenvolvimento',
+      },
+    ],
+  },
+  transform: jsonSchemaTransform,
+})
+
+server.register(fastifySwaggerUi, {
+  routePrefix: '/docs',
+})
 
 server.get('/health', async () => {
   return { status: 'ok' }
