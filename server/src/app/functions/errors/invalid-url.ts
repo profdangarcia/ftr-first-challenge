@@ -1,6 +1,6 @@
 export class InvalidUrlError extends Error {
-  constructor(url: string) {
-    super(`Invalid URL format: "${url}".`)
+  constructor() {
+    super('Formato de URL inválido.')
     this.name = 'InvalidUrlError'
   }
 }

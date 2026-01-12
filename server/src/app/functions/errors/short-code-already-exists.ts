@@ -1,6 +1,6 @@
 export class ShortCodeAlreadyExistsError extends Error {
-  constructor(shortCode: string) {
-    super(`Short code "${shortCode}" already exists.`)
+  constructor() {
+    super('Link encurtado já existe.')
     this.name = 'ShortCodeAlreadyExistsError'
   }
 }

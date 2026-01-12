@@ -4,9 +4,14 @@ import { z } from 'zod'
 import { isLeft, unwrapEither } from '@/infra/shared/either'
 import { InvalidUrlError } from '@/app/functions/errors/invalid-url'
 import { ShortCodeAlreadyExistsError } from '@/app/functions/errors/short-code-already-exists'
+import { InvalidShortCodeError } from '@/app/functions/errors/invalid-short-code'
 
 const createLinkBodySchema = z.object({
-  originalUrl: z.string().url('Invalid URL format'),
+  originalUrl: z.string().url('Formato de URL inválido'),
+  shortCode: z
+    .string()
+    .regex(/^[a-zA-Z0-9_-]+$/, 'O link encurtado pode conter apenas letras, números, hífens e underscores')
+    .optional(),
 })
 
 export const createLinkRoute: FastifyPluginAsyncZod = async (server) => {
@@ -28,14 +33,18 @@ export const createLinkRoute: FastifyPluginAsyncZod = async (server) => {
       },
     },
     async (request, reply) => {
-      const { originalUrl } = request.body
+      const { originalUrl, shortCode } = request.body
 
-      const result = await createLink(originalUrl)
+      const result = await createLink(originalUrl, shortCode)
 
       if (isLeft(result)) {
         const error = unwrapEither(result)
 
         if (error instanceof InvalidUrlError) {
+          return reply.status(400).send({ message: error.message })
+        }
+
+        if (error instanceof InvalidShortCodeError) {
           return reply.status(400).send({ message: error.message })
         }
 

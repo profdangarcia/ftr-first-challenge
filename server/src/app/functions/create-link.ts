@@ -3,6 +3,7 @@ import { db } from '@/infra/db'
 import { makeLeft, makeRight, type Either } from '@/infra/shared/either'
 import { InvalidUrlError } from './errors/invalid-url'
 import { ShortCodeAlreadyExistsError } from './errors/short-code-already-exists'
+import { InvalidShortCodeError } from './errors/invalid-short-code'
 import { uuidv7 } from 'uuidv7'
 import { links } from '@/infra/db/schemas'
 
@@ -45,6 +46,11 @@ function isValidUrl(url: string): boolean {
   }
 }
 
+function isValidShortCode(shortCode: string): boolean {
+  // Permite apenas letras, números, hífens e underscores
+  return /^[a-zA-Z0-9_-]+$/.test(shortCode)
+}
+
 type CreateLinkResult = {
   id: string
   originalUrl: string
@@ -55,22 +61,47 @@ type CreateLinkResult = {
 }
 
 export async function createLink(
-  originalUrl: string
+  originalUrl: string,
+  customShortCode?: string
 ): Promise<
-  Either<InvalidUrlError | ShortCodeAlreadyExistsError, CreateLinkResult>
+  Either<
+    InvalidUrlError | ShortCodeAlreadyExistsError | InvalidShortCodeError,
+    CreateLinkResult
+  >
 > {
   if (!isValidUrl(originalUrl)) {
-    return makeLeft(new InvalidUrlError(originalUrl))
+    return makeLeft(new InvalidUrlError())
+  }
+
+  let shortCodeToUse: string
+
+  if (customShortCode) {
+    if (!isValidShortCode(customShortCode)) {
+      return makeLeft(new InvalidShortCodeError())
+    }
+
+    // Verifica se o código já existe
+    const existing = await db
+      .select()
+      .from(links)
+      .where(eq(links.shortCode, customShortCode))
+      .limit(1)
+
+    if (existing.length > 0) {
+      return makeLeft(new ShortCodeAlreadyExistsError())
+    }
+
+    shortCodeToUse = customShortCode
+  } else {
+    shortCodeToUse = await ensureUniqueShortCode()
   }
 
   try {
-    const shortCode = await ensureUniqueShortCode()
-
     const [link] = await db
       .insert(links)
       .values({
         originalUrl,
-        shortCode,
+        shortCode: shortCodeToUse,
         accessCount: 0,
       })
       .returning()
@@ -82,7 +113,7 @@ export async function createLink(
       error.message.includes('unique constraint')
     ) {
       // Fallback caso o shortCode ainda exista após verificação
-      return makeLeft(new ShortCodeAlreadyExistsError(''))
+      return makeLeft(new ShortCodeAlreadyExistsError())
     }
     throw error
   }
