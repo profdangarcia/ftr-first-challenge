@@ -5,14 +5,39 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        blue: {
+          base: "#2C46B1",
+          dark: "#2C4091",
+        },
+        gray: {
+          100: "#F9F9FB",
+          200: "#E4E6EC",
+          300: "#CDCFD5",
+          400: "#74798B",
+          500: "#4D505C",
+          600: "#1F2025",
+        },
+        white: "#FFFFFF",
+        danger: "#B12C4D",
+      },
       opacity: {
         2: 0.02,
       },
-      fontSize: {
-        xxs: "0.625rem",
-      },
       fontFamily: {
-        sans: ["Inter", ...theme.fontFamily.sans],
+        sans: ["Open Sans", "sans-serif"],
+      },
+      fontSize: {
+        "text-xs": ["10px", { lineHeight: "14px", letterSpacing: "0" }],
+        "text-sm": ["12px", { lineHeight: "16px", letterSpacing: "0" }],
+        "text-md": ["14px", { lineHeight: "18px", letterSpacing: "0" }],
+        "text-lg": ["18px", { lineHeight: "24px", letterSpacing: "0" }],
+        "text-xl": ["24px", { lineHeight: "32px", letterSpacing: "0" }],
+      },
+      fontWeight: {
+        regular: "400",
+        semibold: "600",
+        bold: "700",
       },
       boxShadow: {
         shape:
