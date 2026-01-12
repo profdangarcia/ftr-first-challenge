@@ -1,4 +1,5 @@
 import { Header } from '@/components/layout/header'
+import { NewLinkForm } from '@/components/forms/new-link-form'
 
 export function Home() {
   return (
@@ -10,16 +11,10 @@ export function Home() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 py-6 md:py-8 lg:pt-0 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-3 lg:gap-5 max-w-7xl mx-auto">
               {/* Painel Esquerdo - Novo link */}
-              <section className="bg-white rounded-lg p-6 md:p-8">
-                <h2 className="text-lg font-bold text-gray-600 mb-6">
-                  Novo link
-                </h2>
-                
-                {/* Formulário será implementado aqui */}
-              </section>
+              <NewLinkForm />
 
               {/* Painel Direito - Meus links */}
-              <section className="bg-white rounded-lg p-6 md:p-8">
+              <section className="bg-gray-100 rounded-lg p-6 md:p-8">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-lg font-bold text-gray-600">Meus links</h2>
                   

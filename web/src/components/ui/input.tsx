@@ -12,7 +12,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const inputClasses = `
       w-full px-4 py-2 rounded-lg border transition-colors
-      bg-white text-gray-600 placeholder-gray-300
+      bg-white text-md text-gray-600 placeholder-gray-400
       focus:outline-none focus:ring-2 focus:ring-offset-1
       ${
         hasError
@@ -23,8 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     `.trim().replace(/\s+/g, ' ')
 
     const labelClasses = `
-      block text-md font-semibold mb-1.5
-      ${hasError ? 'text-danger' : 'text-gray-600'}
+      block text-xs text-gray-500 mb-1.5
     `.trim().replace(/\s+/g, ' ')
 
     return (
@@ -34,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {hasError && (
           <div className="flex items-center gap-1.5 mt-1.5">
             <AlertTriangle size={14} className="text-danger flex-shrink-0" />
-            <span className="text-sm text-danger">{error}</span>
+            <span className="text-sm text-gray-500">{error}</span>
           </div>
         )}
       </div>

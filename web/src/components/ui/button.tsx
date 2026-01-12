@@ -27,7 +27,7 @@ export function Button({
     primary: {
       default:
         'bg-blue-base text-white hover:bg-blue-dark focus:ring-blue-base',
-      disabled: 'bg-gray-200 text-gray-300 cursor-not-allowed',
+      disabled: 'bg-blue-base/50 text-white cursor-not-allowed',
     },
     secondary: {
       default:
