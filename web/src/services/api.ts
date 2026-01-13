@@ -41,4 +41,11 @@ export const linkService = {
   async getByShortCode(shortCode: string) {
     return api.get<ILink>(`/links/${shortCode}`)
   },
+
+  async export() {
+    return requestHandler<{ url: string; fileName: string }>(
+      () => api.get('/links/export'),
+      { success: 'CSV gerado com sucesso!' }
+    )
+  },
 }

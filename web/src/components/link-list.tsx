@@ -9,6 +9,7 @@ import type { ILink } from '@/types/link'
 
 export function LinkList() {
   const [links, setLinks] = useState<ILink[]>([])
+  const [isExporting, setIsExporting] = useState(false)
 
   const { data, isLoading } = useQuery({
     queryKey: ['links'],
@@ -26,13 +27,30 @@ export function LinkList() {
 
   const hasLinks = links.length > 0
 
+  async function handleExportCsv() {
+    setIsExporting(true)
+    const result = await linkService.export()
+
+    if (!result.errors && result.data) {
+      // Abre a URL do CSV em uma nova aba para download
+      window.open(result.data.url, '_blank')
+    }
+
+    setIsExporting(false)
+  }
+
   return (
     <section className="bg-gray-100 rounded-lg p-6 md:p-8 h-fit">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-lg font-bold text-gray-600">Meus links</h2>
 
-        <Button size="sm" icon={Download} disabled={!hasLinks}>
-          Baixar CSV
+        <Button
+          size="sm"
+          icon={Download}
+          disabled={!hasLinks || isExporting}
+          onClick={handleExportCsv}
+        >
+          {isExporting ? 'Gerando...' : 'Baixar CSV'}
         </Button>
       </div>
 
