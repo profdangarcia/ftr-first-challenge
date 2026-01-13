@@ -41,7 +41,7 @@ export function LinkItem({ link }: LinkItemProps) {
     <div className="py-3.5 md:py-4 flex items-center gap-4">
       <div className="flex-1 min-w-0">
         <Link
-          to={`/links/${link.shortCode}`}
+          to={`/${link.shortCode}`}
           className="block text-md text-blue-base hover:underline truncate"
         >
           {shortUrl}

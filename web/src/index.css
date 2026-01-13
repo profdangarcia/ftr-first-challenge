@@ -7,3 +7,9 @@
   initial-value: 0deg;
   syntax: "<angle>";
 }
+
+@layer base {
+  body {
+    @apply bg-gray-200;
+  }
+}
