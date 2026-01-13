@@ -30,4 +30,11 @@ export const linkService = {
   async list(query?: ListLinksQuery) {
     return api.get<ILink[]>('/links', { params: query })
   },
+
+  async delete(id: string) {
+    return requestHandler<void>(
+      () => api.delete(`/links/${id}`),
+      { success: 'Link excluído com sucesso!' }
+    )
+  },
 }

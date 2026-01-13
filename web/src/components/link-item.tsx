@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Copy, Trash2 } from 'lucide-react'
+import { useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import { IconButton } from '@/components/ui/icon-button'
+import { linkService } from '@/services/api'
 import type { ILink } from '@/types/link'
 
 interface LinkItemProps {
@@ -8,7 +11,31 @@ interface LinkItemProps {
 }
 
 export function LinkItem({ link }: LinkItemProps) {
+  const queryClient = useQueryClient()
   const shortUrl = `brev.ly/${link.shortCode}`
+
+  function getFullShortUrl(): string {
+    const frontendUrl = import.meta.env.VITE_FRONTEND_URL || 'http://localhost:5173'
+    return `${frontendUrl}/${link.shortCode}`
+  }
+
+  async function handleCopy() {
+    try {
+      const fullUrl = getFullShortUrl()
+      await navigator.clipboard.writeText(fullUrl)
+      toast.success('Link copiado para a área de transferência!')
+    } catch (error) {
+      toast.error('Erro ao copiar link. Tente novamente.')
+    }
+  }
+
+  async function handleDelete() {
+    const result = await linkService.delete(link.id)
+
+    if (!result.errors) {
+      queryClient.invalidateQueries({ queryKey: ['links'] })
+    }
+  }
 
   return (
     <div className="py-3.5 md:py-4 flex items-center gap-4">
@@ -32,17 +59,13 @@ export function LinkItem({ link }: LinkItemProps) {
         <IconButton
           icon={Copy}
           aria-label="Copiar link"
-          onClick={() => {
-            // TODO: Implementar cópia para clipboard
-          }}
+          onClick={handleCopy}
         />
 
         <IconButton
           icon={Trash2}
           aria-label="Deletar link"
-          onClick={() => {
-            // TODO: Implementar deleção
-          }}
+          onClick={handleDelete}
         />
       </div>
     </div>
