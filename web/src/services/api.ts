@@ -37,4 +37,8 @@ export const linkService = {
       { success: 'Link excluído com sucesso!' }
     )
   },
+
+  async getByShortCode(shortCode: string) {
+    return api.get<ILink>(`/links/${shortCode}`)
+  },
 }

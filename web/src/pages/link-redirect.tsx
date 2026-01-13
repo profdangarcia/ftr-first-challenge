@@ -1,8 +1,27 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import logoIcon from '@/assets/logo_icon.svg'
+import { linkService } from '@/services/api'
 
 export function LinkRedirect() {
   const { shortCode } = useParams<{ shortCode: string }>()
+
+  const { data } = useQuery({
+    queryKey: ['link', shortCode],
+    queryFn: async () => {
+      if (!shortCode) return null
+      const response = await linkService.getByShortCode(shortCode)
+      return response.data
+    },
+    enabled: !!shortCode,
+  })
+
+  useEffect(() => {
+    if (data?.originalUrl) {
+      window.location.href = data.originalUrl
+    }
+  }, [data])
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -23,7 +42,10 @@ export function LinkRedirect() {
 
         <p className="text-md text-gray-500">
           Não foi redirecionado?{' '}
-          <a href="#" className="text-blue-base hover:underline">
+          <a
+            href={data?.originalUrl || '#'}
+            className="text-blue-base hover:underline"
+          >
             Acesse aqui
           </a>
         </p>
