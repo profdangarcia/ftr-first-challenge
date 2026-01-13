@@ -1,5 +1,6 @@
 import { Header } from '@/components/layout/header'
 import { NewLinkForm } from '@/components/forms/new-link-form'
+import { LinkList } from '@/components/link-list'
 
 export function Home() {
   return (
@@ -14,15 +15,7 @@ export function Home() {
               <NewLinkForm />
 
               {/* Painel Direito - Meus links */}
-              <section className="bg-gray-100 rounded-lg p-6 md:p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-lg font-bold text-gray-600">Meus links</h2>
-                  
-                  {/* Botão Baixar CSV será implementado aqui */}
-                </div>
-                
-                {/* Lista de links será implementada aqui */}
-              </section>
+              <LinkList />
             </div>
           </div>
         </main>

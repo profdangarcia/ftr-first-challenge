@@ -12,16 +12,16 @@ export function IconButton({
   ...props
 }: IconButtonProps) {
   const baseClasses =
-    'inline-flex items-center justify-center rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-base focus:ring-offset-2'
+    'inline-flex items-center justify-center w-8 h-8 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-base focus:ring-offset-2'
 
   const defaultClasses =
-    'bg-gray-200 text-gray-500 hover:bg-white hover:border hover:border-blue-base'
+    'bg-gray-200 text-gray-600 border border-transparent hover:border-blue-base'
 
   const classes = `${baseClasses} ${defaultClasses} ${className}`
 
   return (
     <button className={classes} {...props}>
-      <Icon size={18} />
+      <Icon size={16} />
     </button>
   )
 }

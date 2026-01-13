@@ -60,7 +60,7 @@ export function NewLinkForm() {
   }
 
   return (
-    <section className="bg-gray-100 rounded-lg p-6 md:p-8">
+    <section className="bg-gray-100 rounded-lg p-6 md:p-8 h-fit">
       <h2 className="text-lg font-bold text-gray-600 mb-6">Novo link</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

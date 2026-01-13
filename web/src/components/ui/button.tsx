@@ -36,21 +36,36 @@ export function Button({
     },
   }
 
-  const sizeClasses = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-md',
-    lg: 'px-6 py-3 text-lg',
+  const getSizeClasses = () => {
+    if (size === 'sm') {
+      return 'px-2 py-2 text-sm font-semibold bg-gray-200 text-gray-500 border border-transparent hover:border-blue-base focus:ring-blue-base disabled:opacity-50 disabled:hover:border-transparent'
+    }
+    if (size === 'md') {
+      return 'px-4 py-2 text-md'
+    }
+    return 'px-6 py-3 text-lg'
   }
 
-  const variantState = disabled
-    ? variantClasses[variant].disabled
-    : variantClasses[variant].default
+  const sizeClasses = getSizeClasses()
 
-  const classes = `${baseClasses} ${sizeClasses[size]} ${variantState} ${className}`
+  // Para botão 'sm', não aplica variant classes pois tem estilo próprio
+  const variantState =
+    size === 'sm'
+      ? ''
+      : disabled
+        ? variantClasses[variant].disabled
+        : variantClasses[variant].default
+
+  const classes = `${baseClasses} ${sizeClasses} ${variantState} ${className}`
 
   return (
     <button className={classes} disabled={disabled} {...props}>
-      {Icon && <Icon size={size === 'sm' ? 16 : size === 'md' ? 18 : 20} />}
+      {Icon && (
+        <Icon
+          size={size === 'sm' ? 16 : size === 'md' ? 18 : 20}
+          className={size === 'sm' ? 'text-gray-500' : ''}
+        />
+      )}
       {children}
     </button>
   )
