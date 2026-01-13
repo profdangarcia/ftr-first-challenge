@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import logoIcon from '@/assets/logo_icon.svg'
 import { linkService } from '@/services/api'
+import { LinkNotFound } from '@/components/link-not-found'
 
 export function LinkRedirect() {
   const { shortCode } = useParams<{ shortCode: string }>()
 
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['link', shortCode],
     queryFn: async () => {
       if (!shortCode) return null
@@ -15,6 +16,7 @@ export function LinkRedirect() {
       return response.data
     },
     enabled: !!shortCode,
+    retry: false,
   })
 
   useEffect(() => {
@@ -22,6 +24,10 @@ export function LinkRedirect() {
       window.location.href = data.originalUrl
     }
   }, [data])
+
+  if (isError || (data === null && shortCode)) {
+    return <LinkNotFound />
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center">
