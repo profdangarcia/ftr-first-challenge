@@ -1,197 +1,199 @@
-# Brev.ly - Frontend Web
+# Brev.ly - Web Frontend
 
-Interface web para gerenciamento de encurtamento de URLs, desenvolvida com React, TypeScript e Vite.
+Web interface for URL shortening management, built with React, TypeScript, and Vite.
 
-## 📋 Sobre o Projeto
+## 📋 About the Project
 
-Brev.ly é uma aplicação web completa para encurtamento de URLs que permite:
-- Criar links encurtados (automáticos ou personalizados)
-- Listar todos os links cadastrados
-- Copiar links encurtados para a área de transferência
-- Deletar links
-- Visualizar contagem de acessos
-- Exportar links para CSV
-- Redirecionamento automático através de links encurtados
+Brev.ly is a complete web application for URL shortening that allows you to:
+- Create shortened links (automatic or custom)
+- List all registered links
+- Copy shortened links to clipboard
+- Delete links
+- View access count
+- Export links to CSV
+- Automatic redirect via shortened links
 
-## 🛠 Tecnologias
+## 🛠 Technologies
 
 - **Framework**: React 18
-- **Linguagem**: TypeScript
+- **Language**: TypeScript
 - **Build Tool**: Vite
-- **Roteamento**: React Router DOM
-- **Gerenciamento de Estado**: React Query (TanStack Query)
-- **Formulários**: React Hook Form + Zod
-- **Estilização**: Tailwind CSS
-- **Ícones**: Lucide React
+- **Routing**: React Router DOM
+- **State Management**: React Query (TanStack Query)
+- **Forms**: React Hook Form + Zod
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
 - **HTTP Client**: Axios
-- **Notificações**: React Toastify
-- **Gerenciador de Pacotes**: pnpm
+- **Notifications**: React Toastify
+- **Package Manager**: pnpm
 
-## 📦 Pré-requisitos
+## 📦 Prerequisites
 
-- Node.js 18 ou superior
-- pnpm (ou npm/yarn)
-- Backend Brev.ly rodando (veja [README do servidor](../server/README.md))
+- Node.js 18 or higher
+- pnpm (or npm/yarn)
+- Brev.ly backend running (see [server README](../server/README.md))
 
-## 🚀 Como Executar Localmente
+## 🚀 Running Locally
 
-### 1. Instalar Dependências
+### 1. Install Dependencies
 
 ```bash
 pnpm install
 ```
 
-### 2. Configurar Variáveis de Ambiente
+### 2. Configure Environment Variables
 
-Crie um arquivo `.env` na raiz do projeto baseado no `.env.example`:
+Create a `.env` file in the project root based on `.env.example`:
 
 ```env
 VITE_FRONTEND_URL=http://localhost:5173
 VITE_BACKEND_URL=http://localhost:3333
+VITE_USE_BACKEND=true
 ```
 
-### 3. Iniciar o Servidor de Desenvolvimento
+### 3. Start the Development Server
 
 ```bash
 pnpm run dev
 ```
 
-A aplicação estará rodando em `http://localhost:5173`
+The application will be running at `http://localhost:5173`
 
-### 4. Build para Produção
+### 4. Build for Production
 
 ```bash
-# Compilar o projeto
+# Compile the project
 pnpm run build
 
-# Visualizar build de produção
+# Preview production build
 pnpm run preview
 ```
 
-Os arquivos compilados estarão na pasta `dist/`
+Compiled files will be in the `dist/` folder.
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 web/
-├── public/                 # Arquivos estáticos (favicon, etc)
+├── public/                 # Static files (favicon, etc)
 ├── src/
-│   ├── assets/            # Imagens e assets (logos, ícones)
-│   ├── components/        # Componentes React
-│   │   ├── forms/         # Componentes de formulário
-│   │   ├── layout/        # Componentes de layout (Header, etc)
-│   │   └── ui/            # Componentes de UI reutilizáveis
-│   ├── pages/             # Páginas da aplicação
-│   ├── routes/            # Configuração de rotas
-│   ├── services/          # Serviços de API
-│   ├── types/             # Definições de tipos TypeScript
-│   ├── utils/             # Funções utilitárias
-│   ├── index.css          # Estilos globais
-│   └── main.tsx           # Ponto de entrada da aplicação
+│   ├── assets/            # Images and assets (logos, icons)
+│   ├── components/        # React components
+│   │   ├── forms/         # Form components
+│   │   ├── layout/        # Layout components (Header, etc)
+│   │   └── ui/            # Reusable UI components
+│   ├── pages/             # Application pages
+│   ├── routes/            # Route configuration
+│   ├── services/          # API services
+│   ├── types/             # TypeScript type definitions
+│   ├── utils/             # Utility functions
+│   ├── index.css          # Global styles
+│   └── main.tsx           # Application entry point
 ├── index.html
 ├── package.json
-├── tailwind.config.js     # Configuração do Tailwind CSS
-├── tsconfig.json          # Configuração do TypeScript
-└── vite.config.ts         # Configuração do Vite
+├── tailwind.config.js     # Tailwind CSS configuration
+├── tsconfig.json          # TypeScript configuration
+└── vite.config.ts         # Vite configuration
 ```
 
-## 🎨 Guia de Estilo
+## 🎨 Style Guide
 
-### Cores
+### Colors
 
-O projeto utiliza um sistema de cores customizado:
+The project uses a custom color system:
 
-- **Azul**: `blue-base` (#2C46B1) e `blue-dark` (#2C4091)
-- **Cinza**: Escala de `gray-100` a `gray-600`
-- **Vermelho**: `danger` (#B12C4D) para erros
-- **Branco**: `white` (#FFFFFF)
+- **Blue**: `blue-base` (#2C46B1) and `blue-dark` (#2C4091)
+- **Gray**: Scale from `gray-100` to `gray-600`
+- **Red**: `danger` (#B12C4D) for errors
+- **White**: `white` (#FFFFFF)
 
-### Tipografia
+### Typography
 
-- **Fonte**: Open Sans (Google Fonts)
-- **Tamanhos**: `text-xs` (10px) até `text-xl` (24px)
-- **Pesos**: `regular` (400), `semibold` (600), `bold` (700)
+- **Font**: Open Sans (Google Fonts)
+- **Sizes**: `text-xs` (10px) up to `text-xl` (24px)
+- **Weights**: `regular` (400), `semibold` (600), `bold` (700)
 
-### Componentes UI
+### UI Components
 
-O projeto possui componentes reutilizáveis:
+The project has reusable components:
 
-- **Button**: Botões com variantes (primary, secondary) e tamanhos (sm, md, lg)
-- **IconButton**: Botões apenas com ícone
-- **Input**: Campos de entrada com label, validação e mensagens de erro
+- **Button**: Buttons with variants (primary, secondary) and sizes (sm, md, lg)
+- **IconButton**: Icon-only buttons
+- **Input**: Input fields with label, validation, and error messages
 
-## 🔌 Integração com a API
+## 🔌 API Integration
 
-A aplicação se comunica com a API backend através dos seguintes endpoints:
+The application communicates with the backend API through the following endpoints:
 
-- **POST** `/links` - Criar novo link
-- **GET** `/links` - Listar todos os links
-- **GET** `/links/:shortCode` - Obter link por código encurtado
-- **DELETE** `/links/:id` - Deletar link
-- **GET** `/links/export` - Exportar links para CSV
+- **POST** `/links` - Create new link
+- **GET** `/links` - List all links
+- **GET** `/links/:shortCode` - Get link by shortened code
+- **DELETE** `/links/:id` - Delete link
+- **GET** `/links/export` - Export links to CSV
 
-## 📝 Scripts Disponíveis
+## 📝 Available Scripts
 
 ```bash
-# Desenvolvimento
-pnpm run dev              # Inicia servidor de desenvolvimento com hot reload
+# Development
+pnpm run dev              # Start development server with hot reload
 
 # Build
-pnpm run build            # Compila o projeto para produção
-pnpm run preview          # Visualiza o build de produção localmente
+pnpm run build            # Compile project for production
+pnpm run preview          # Preview production build locally
 
 # Linting
-pnpm run lint             # Executa o linter
+pnpm run lint             # Run the linter
 ```
 
-## 🎯 Funcionalidades
+## 🎯 Features
 
-### Página Inicial (`/`)
+### Home Page (`/`)
 
-- **Formulário de Novo Link**: Permite criar links encurtados com URL original obrigatória e código personalizado opcional
-- **Lista de Links**: Exibe todos os links cadastrados com:
-  - URL encurtada (clicável)
-  - URL original
-  - Contagem de acessos
-  - Botões para copiar e deletar
-  - Botão para exportar CSV
+- **New Link Form**: Create shortened links with required original URL and optional custom code
+- **Link List**: Displays all registered links with:
+  - Shortened URL (clickable)
+  - Original URL
+  - Access count
+  - Copy and delete buttons
+  - CSV export button
 
-### Página de Redirecionamento (`/:shortCode`)
+### Redirect Page (`/:shortCode`)
 
-- Busca automaticamente o link pelo código encurtado
-- Redireciona automaticamente para a URL original
-- Exibe mensagem de "Redirecionando..." durante o processo
-- Mostra página 404 caso o link não seja encontrado
+- Automatically looks up the link by shortened code
+- Redirects to the original URL
+- Shows "Redirecting..." message during the process
+- Displays 404 page when the link is not found
 
-### Página 404
+### 404 Page
 
-- Exibida quando:
-  - Um link encurtado não é encontrado
-  - Uma rota não existe na aplicação
+- Shown when:
+  - A shortened link is not found
+  - A route does not exist in the application
 
-## 🔐 Variáveis de Ambiente
+## 🔐 Environment Variables
 
-| Variável | Descrição | Obrigatório | Padrão |
-|----------|-----------|-------------|--------|
-| `VITE_FRONTEND_URL` | URL do frontend (usado para gerar links completos) | Não | - |
-| `VITE_BACKEND_URL` | URL da API backend | Não | `http://localhost:3333` |
+| Variable | Description | Required | Default |
+|----------|-------------|----------|---------|
+| `VITE_FRONTEND_URL` | Frontend URL (used to generate full links) | No | - |
+| `VITE_BACKEND_URL` | Backend API URL | No | `http://localhost:3333` |
+| `VITE_USE_BACKEND` | When `true`, uses the backend API; when `false`, stores data in memory and sessionStorage (no backend) | No | `true` |
 
-## 🏗 Arquitetura
+## 🏗 Architecture
 
-O projeto segue uma arquitetura baseada em componentes:
+The project follows a component-based architecture:
 
-- **Pages**: Componentes de página que compõem as rotas
-- **Components**: Componentes reutilizáveis organizados por categoria
-- **Services**: Camada de abstração para chamadas de API
-- **Utils**: Funções utilitárias compartilhadas
-- **Types**: Definições de tipos TypeScript compartilhadas
+- **Pages**: Page components that make up the routes
+- **Components**: Reusable components organized by category
+- **Services**: Abstraction layer for API calls
+- **Utils**: Shared utility functions
+- **Types**: Shared TypeScript type definitions
 
-### Gerenciamento de Estado
+### State Management
 
-- **React Query**: Gerencia estado do servidor (cache, refetch, etc)
-- **React Hook Form**: Gerencia estado de formulários
-- **Estado Local**: `useState` para estado simples de componentes
+- **React Query**: Manages server state (cache, refetch, etc.)
+- **React Hook Form**: Manages form state
+- **Local State**: `useState` for simple component state
 
-## 📄 Licença
+## 📄 License
 
 ISC
