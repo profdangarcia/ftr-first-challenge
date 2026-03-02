@@ -9,7 +9,7 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:3333',
 })
 
-/** true = usa backend; false = dados em memória + sessionStorage */
+/** true = usa backend; false = dados em memória + localStorage */
 export const useBackend = (): boolean =>
   import.meta.env.VITE_USE_BACKEND === 'true'
 

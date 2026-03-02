@@ -26,6 +26,12 @@ Brev.ly is a complete platform for URL shortening that allows you to create, man
 - ✅ Export links to CSV
 - ✅ Automatic redirect via shortened links
 
+## 🌐 Live Demo
+
+Try the app without installing anything — **backendless version** (data stored in the browser's localStorage):
+
+**[→ Brev.ly Live Demo](https://brevly-pink.vercel.app/)**
+
 ## 🏗 Project Structure
 
 This is a monorepo containing two main projects:

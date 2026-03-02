@@ -1,6 +1,7 @@
 /**
- * Camada de persistência em tempo de execução (sessionStorage + memória).
+ * Camada de persistência em tempo de execução (localStorage + memória).
  * Usada quando VITE_USE_BACKEND=false.
+ * Usa localStorage para que os dados fiquem disponíveis em outras abas/janelas.
  */
 
 import type { ILink } from '@/types/link'
@@ -12,7 +13,7 @@ let memoryCache: ILink[] | null = null
 function loadFromStorage(): ILink[] {
   if (memoryCache !== null) return memoryCache
   try {
-    const raw = sessionStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(STORAGE_KEY)
     memoryCache = raw ? (JSON.parse(raw) as ILink[]) : []
   } catch {
     memoryCache = []
@@ -23,9 +24,9 @@ function loadFromStorage(): ILink[] {
 function persist(links: ILink[]): void {
   memoryCache = links
   try {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(links))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(links))
   } catch {
-    // sessionStorage cheio ou indisponível; mantém só em memória
+    // localStorage cheio ou indisponível; mantém só em memória
   }
 }
 

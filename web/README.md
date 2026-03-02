@@ -176,7 +176,7 @@ pnpm run lint             # Run the linter
 |----------|-------------|----------|---------|
 | `VITE_FRONTEND_URL` | Frontend URL (used to generate full links) | No | - |
 | `VITE_BACKEND_URL` | Backend API URL | No | `http://localhost:3333` |
-| `VITE_USE_BACKEND` | When `true`, uses the backend API; when `false`, stores data in memory and sessionStorage (no backend) | No | `true` |
+| `VITE_USE_BACKEND` | When `true`, uses the backend API; when `false`, stores data in memory and localStorage (no backend) | No | `true` |
 
 ## 🏗 Architecture
 
