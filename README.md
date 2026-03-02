@@ -1,66 +1,66 @@
-# Brev.ly - Encurtador de URLs
+# Brev.ly - URL Shortener
 
-Monorepo contendo a aplicação completa de encurtamento de URLs **Brev.ly**, composta por backend (API REST) e frontend (aplicação web).
+Monorepo containing the complete **Brev.ly** URL shortening application, composed of a backend (REST API) and frontend (web application).
 
-## 📋 Sobre o Projeto
+## 📋 About the Project
 
-Brev.ly é uma plataforma completa para encurtamento de URLs que permite criar, gerenciar e analisar links encurtados de forma eficiente.
+Brev.ly is a complete platform for URL shortening that allows you to create, manage, and analyze shortened links efficiently.
 
-### Funcionalidades Principais
+### Main Features
 
 **Backend (API):**
-- ✅ Criar links encurtados automaticamente
-- ✅ Listar todos os links cadastrados
-- ✅ Obter URL original através do código encurtado
-- ✅ Deletar links
-- ✅ Contabilizar acessos aos links
-- ✅ Exportar links para CSV via Cloudflare R2
+- ✅ Create shortened links automatically
+- ✅ List all registered links
+- ✅ Get original URL via shortened code
+- ✅ Delete links
+- ✅ Track link access counts
+- ✅ Export links to CSV via Cloudflare R2
 
 **Frontend (Web):**
-- ✅ Interface moderna e responsiva
-- ✅ Criar links encurtados (automáticos ou personalizados)
-- ✅ Visualizar lista completa de links
-- ✅ Copiar links encurtados para área de transferência
-- ✅ Deletar links com confirmação
-- ✅ Visualizar contagem de acessos em tempo real
-- ✅ Exportar links para CSV
-- ✅ Redirecionamento automático através de links encurtados
+- ✅ Modern, responsive interface
+- ✅ Create shortened links (automatic or custom)
+- ✅ View full list of links
+- ✅ Copy shortened links to clipboard
+- ✅ Delete links with confirmation
+- ✅ View access count in real time
+- ✅ Export links to CSV
+- ✅ Automatic redirect via shortened links
 
-## 🏗 Estrutura do Projeto
+## 🏗 Project Structure
 
-Este é um monorepo contendo dois projetos principais:
+This is a monorepo containing two main projects:
 
 ```
 ftr-first-challenge/
 ├── server/          # Backend API (Fastify + TypeScript + PostgreSQL)
 ├── web/             # Frontend (React)
-└── README.md        # Este arquivo
+└── README.md        # This file
 ```
 
-## 📦 Projetos
+## 📦 Projects
 
 ### 🔧 Backend (`/server`)
 
-API REST desenvolvida com Fastify, TypeScript, PostgreSQL e Drizzle ORM.
+REST API built with Fastify, TypeScript, PostgreSQL, and Drizzle ORM.
 
-**Documentação completa**: [server/README.md](./server/README.md)
+**Full documentation**: [server/README.md](./server/README.md)
 
-**Principais tecnologias:**
+**Main technologies:**
 - Fastify
 - TypeScript
 - PostgreSQL
 - Drizzle ORM
-- Zod (validação)
+- Zod (validation)
 - Cloudflare R2 (storage)
-- Swagger/OpenAPI (documentação)
+- Swagger/OpenAPI (documentation)
 
 ### 🎨 Frontend (`/web`)
 
-Aplicação web moderna desenvolvida com React, TypeScript e Vite, oferecendo uma interface intuitiva para gerenciamento de links encurtados.
+Modern web application built with React, TypeScript, and Vite, offering an intuitive interface for managing shortened links.
 
-**Documentação completa**: [web/README.md](./web/README.md)
+**Full documentation**: [web/README.md](./web/README.md)
 
-**Principais tecnologias:**
+**Main technologies:**
 - React 18
 - TypeScript
 - Vite
@@ -72,12 +72,12 @@ Aplicação web moderna desenvolvida com React, TypeScript e Vite, oferecendo um
 - React Toastify
 
 
-## 📚 Documentação
+## 📚 Documentation
 
-- [Backend - Documentação Completa](./server/README.md)
-- [Frontend - Documentação Completa](./web/README.md)
+- [Backend - Full Documentation](./server/README.md)
+- [Frontend - Full Documentation](./web/README.md)
 
-## 🛠 Tecnologias Utilizadas
+## 🛠 Technologies Used
 
 ### Backend
 - Node.js 22
@@ -99,15 +99,15 @@ Aplicação web moderna desenvolvida com React, TypeScript e Vite, oferecendo um
 - Tailwind CSS
 - Axios
 - React Toastify
-- Lucide React (ícones)
+- Lucide React (icons)
 
-## 🚀 Como Começar
+## 🚀 Getting Started
 
-Para instruções detalhadas de instalação e execução, consulte os READMEs específicos de cada projeto:
+For detailed installation and run instructions, see each project's README:
 
-- [Backend - Guia de Instalação](./server/README.md)
-- [Frontend - Guia de Instalação](./web/README.md)
+- [Backend - Installation Guide](./server/README.md)
+- [Frontend - Installation Guide](./web/README.md)
 
-## 📝 Licença
+## 📝 License
 
 ISC

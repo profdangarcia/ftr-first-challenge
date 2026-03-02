@@ -1,51 +1,51 @@
-# Brev.ly - API de Encurtamento de URLs
+# Brev.ly - URL Shortening API
 
-API REST para gerenciamento de encurtamento de URLs, desenvolvida com Fastify, TypeScript e PostgreSQL.
+REST API for URL shortening management, built with Fastify, TypeScript, and PostgreSQL.
 
-## 📋 Sobre o Projeto
+## 📋 About the Project
 
-Brev.ly é uma API completa para encurtamento de URLs que permite:
-- Criar links encurtados automaticamente
-- Listar todos os links cadastrados
-- Obter a URL original através do código encurtado
-- Deletar links
-- Contabilizar acessos aos links
-- Exportar links para CSV via Cloudflare R2
+Brev.ly is a complete API for URL shortening that allows you to:
+- Create shortened links automatically
+- List all registered links
+- Get the original URL via the shortened code
+- Delete links
+- Track link access counts
+- Export links to CSV via Cloudflare R2
 
-## 🛠 Tecnologias
+## 🛠 Technologies
 
 - **Runtime**: Node.js 22
 - **Framework**: Fastify
-- **Linguagem**: TypeScript
+- **Language**: TypeScript
 - **ORM**: Drizzle ORM
-- **Banco de Dados**: PostgreSQL
-- **Validação**: Zod
+- **Database**: PostgreSQL
+- **Validation**: Zod
 - **Storage**: Cloudflare R2 (S3-compatible)
-- **Documentação**: Swagger/OpenAPI
-- **Gerenciador de Pacotes**: pnpm
+- **Documentation**: Swagger/OpenAPI
+- **Package Manager**: pnpm
 
-## 📦 Pré-requisitos
+## 📦 Prerequisites
 
-- Node.js 22 ou superior
-- pnpm (ou npm/yarn)
-- PostgreSQL 13 ou superior
-- Conta Cloudflare R2 (para upload de CSV)
+- Node.js 22 or higher
+- pnpm (or npm/yarn)
+- PostgreSQL 13 or higher
+- Cloudflare R2 account (for CSV upload)
 
-## 🚀 Como Executar Localmente
+## 🚀 Running Locally
 
-### 1. Instalar Dependências
+### 1. Install Dependencies
 
 ```bash
 pnpm install
 ```
 
-### 2. Configurar Variáveis de Ambiente
+### 2. Configure Environment Variables
 
-Crie um arquivo `.env` na raiz do projeto baseado no `.env.example`:
+Create a `.env` file in the project root based on `.env.example`:
 
 ```env
 PORT=3333
-DATABASE_URL=postgresql://usuario:senha@localhost:5432/nome_do_banco
+DATABASE_URL=postgresql://user:password@localhost:5432/database_name
 
 CLOUDFLARE_ACCOUNT_ID=""
 CLOUDFLARE_ACCESS_KEY_ID=""
@@ -54,45 +54,45 @@ CLOUDFLARE_BUCKET=""
 CLOUDFLARE_PUBLIC_URL=""
 ```
 
-### 3. Executar Migrations
+### 3. Run Migrations
 
 ```bash
-# Gerar migrations (se necessário)
+# Generate migrations (if needed)
 pnpm run db:generate
 
-# Executar migrations
+# Run migrations
 pnpm run db:migrate
 ```
 
-### 4. Iniciar o Servidor
+### 4. Start the Server
 
 ```bash
-# Desenvolvimento (com hot reload)
+# Development (with hot reload)
 pnpm run dev
 
-# Produção
+# Production
 pnpm run build
 pnpm start
 ```
 
-O servidor estará rodando em `http://localhost:3333`
+The server will be running at `http://localhost:3333`
 
-## 📚 Documentação da API
+## 📚 API Documentation
 
-Após iniciar o servidor, a documentação interativa do Swagger estará disponível em:
+After starting the server, the interactive Swagger documentation is available at:
 
 - **Swagger UI**: http://localhost:3333/docs
 - **OpenAPI JSON**: http://localhost:3333/docs/json
 
 ## 🐳 Docker
 
-### Construir a Imagem
+### Build the Image
 
 ```bash
 docker build -t brevly-api .
 ```
 
-### Executar com Docker
+### Run with Docker
 
 ```bash
 docker run -p 3333:3333 --env-file .env brevly-api
@@ -100,109 +100,109 @@ docker run -p 3333:3333 --env-file .env brevly-api
 
 ### Docker Compose
 
-O projeto inclui um `docker-compose.yml` para facilitar o desenvolvimento com PostgreSQL:
+The project includes a `docker-compose.yml` for easier development with PostgreSQL:
 
 ```bash
 docker-compose up -d
 ```
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 server/
 ├── src/
 │   ├── app/
-│   │   └── functions/          # Lógica de negócio (use cases)
+│   │   └── functions/          # Business logic (use cases)
 │   │       ├── create-link.ts
 │   │       ├── delete-link.ts
 │   │       ├── get-link-by-short-code.ts
 │   │       ├── list-links.ts
 │   │       ├── export-links-to-csv.ts
-│   │       └── errors/         # Classes de erro customizadas
+│   │       └── errors/         # Custom error classes
 │   ├── infra/
 │   │   ├── db/
-│   │   │   ├── schemas/        # Schemas do Drizzle ORM
-│   │   │   ├── migrations/     # Migrations do banco
-│   │   │   ├── index.ts        # Conexão com o banco
-│   │   │   └── migrate.ts      # Script de migração
+│   │   │   ├── schemas/        # Drizzle ORM schemas
+│   │   │   ├── migrations/     # Database migrations
+│   │   │   ├── index.ts        # Database connection
+│   │   │   └── migrate.ts      # Migration script
 │   │   ├── http/
-│   │   │   ├── routes/         # Rotas da API
-│   │   │   └── server.ts       # Configuração do servidor
-│   │   ├── storage/            # Integração com Cloudflare R2
-│   │   └── shared/             # Utilitários compartilhados
-│   └── env.ts                  # Validação de variáveis de ambiente
+│   │   │   ├── routes/         # API routes
+│   │   │   └── server.ts       # Server configuration
+│   │   ├── storage/            # Cloudflare R2 integration
+│   │   └── shared/             # Shared utilities
+│   └── env.ts                  # Environment variable validation
 ├── docker-compose.yml
 ├── Dockerfile
 ├── drizzle.config.ts
 └── package.json
 ```
 
-## 🔌 Endpoints da API
+## 🔌 API Endpoints
 
 ### Health Check
-- **GET** `/health` - Verifica se a API está funcionando
+- **GET** `/health` - Check if the API is running
 
 ### Links
-- **POST** `/links` - Cria um novo link encurtado
-- **GET** `/links` - Lista todos os links (com paginação)
-- **GET** `/links/:shortCode` - Obtém a URL original pelo código encurtado (incrementa contador)
-- **DELETE** `/links/:id` - Deleta um link por ID
-- **GET** `/links/export` - Exporta todos os links para CSV no Cloudflare R2
+- **POST** `/links` - Create a new shortened link
+- **GET** `/links` - List all links (with pagination)
+- **GET** `/links/:shortCode` - Get original URL by shortened code (increments counter)
+- **DELETE** `/links/:id` - Delete a link by ID
+- **GET** `/links/export` - Export all links to CSV on Cloudflare R2
 
-## 📝 Scripts Disponíveis
+## 📝 Available Scripts
 
 ```bash
-# Desenvolvimento
-pnpm run dev              # Inicia servidor com hot reload
+# Development
+pnpm run dev              # Start server with hot reload
 
-# Banco de Dados
-pnpm run db:generate      # Gera migrations do Drizzle
-pnpm run db:migrate       # Executa migrations
-pnpm run db:studio        # Abre Drizzle Studio (interface visual do banco)
+# Database
+pnpm run db:generate      # Generate Drizzle migrations
+pnpm run db:migrate       # Run migrations
+pnpm run db:studio        # Open Drizzle Studio (visual database interface)
 
 # Build
-pnpm run build            # Compila TypeScript para JavaScript
-pnpm start                # Executa versão compilada
+pnpm run build            # Compile TypeScript to JavaScript
+pnpm start                # Run compiled version
 
-# Testes
-pnpm test                 # Executa testes
-pnpm run test:watch       # Executa testes em modo watch
+# Tests
+pnpm test                 # Run tests
+pnpm run test:watch       # Run tests in watch mode
 ```
 
-## 🗄 Banco de Dados
+## 🗄 Database
 
-O projeto usa Drizzle ORM para gerenciar o banco de dados. A tabela principal é:
+The project uses Drizzle ORM to manage the database. The main table is:
 
-### Tabela `links`
-- `id` (UUID) - Identificador único
-- `original_url` (TEXT) - URL original
-- `short_code` (TEXT) - Código encurtado (único)
-- `access_count` (INTEGER) - Contador de acessos
-- `created_at` (TIMESTAMP) - Data de criação
-- `updated_at` (TIMESTAMP) - Data de atualização
+### `links` table
+- `id` (UUID) - Unique identifier
+- `original_url` (TEXT) - Original URL
+- `short_code` (TEXT) - Shortened code (unique)
+- `access_count` (INTEGER) - Access counter
+- `created_at` (TIMESTAMP) - Creation date
+- `updated_at` (TIMESTAMP) - Last update date
 
-## 🔐 Variáveis de Ambiente
+## 🔐 Environment Variables
 
-| Variável | Descrição | Obrigatório |
-|----------|-----------|-------------|
-| `PORT` | Porta do servidor (padrão: 3333) | Não |
-| `DATABASE_URL` | URL de conexão com PostgreSQL | Sim |
-| `CLOUDFLARE_ACCOUNT_ID` | ID da conta Cloudflare | Sim |
-| `CLOUDFLARE_ACCESS_KEY_ID` | Access Key ID do R2 | Sim |
-| `CLOUDFLARE_SECRET_ACCESS_KEY` | Secret Access Key do R2 | Sim |
-| `CLOUDFLARE_BUCKET` | Nome do bucket R2 | Sim |
-| `CLOUDFLARE_PUBLIC_URL` | URL pública do bucket | Sim |
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `PORT` | Server port (default: 3333) | No |
+| `DATABASE_URL` | PostgreSQL connection URL | Yes |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID | Yes |
+| `CLOUDFLARE_ACCESS_KEY_ID` | R2 Access Key ID | Yes |
+| `CLOUDFLARE_SECRET_ACCESS_KEY` | R2 Secret Access Key | Yes |
+| `CLOUDFLARE_BUCKET` | R2 bucket name | Yes |
+| `CLOUDFLARE_PUBLIC_URL` | Public bucket URL | Yes |
 
-## 🏗 Arquitetura
+## 🏗 Architecture
 
-O projeto segue uma arquitetura em camadas:
+The project follows a layered architecture:
 
-- **Infrastructure Layer** (`src/infra/`): Configurações e integrações externas (HTTP, DB, Storage)
-- **Application Layer** (`src/app/functions/`): Lógica de negócio e use cases
-- **Domain Layer**: Representado pelas classes de erro e tipos compartilhados
+- **Infrastructure Layer** (`src/infra/`): External configurations and integrations (HTTP, DB, Storage)
+- **Application Layer** (`src/app/functions/`): Business logic and use cases
+- **Domain Layer**: Represented by error classes and shared types
 
-As rotas utilizam validação Zod e retornam erros tipados usando o padrão Either.
+Routes use Zod validation and return typed errors using the Either pattern.
 
-## 📄 Licença
+## 📄 License
 
 ISC
