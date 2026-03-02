@@ -31,8 +31,7 @@ export function LinkList() {
     setIsExporting(true)
     const result = await linkService.export()
 
-    if (!result.errors && result.data) {
-      // Abre a URL do CSV em uma nova aba para download
+    if (!result.errors && result.data?.url) {
       window.open(result.data.url, '_blank')
     }
 

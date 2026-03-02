@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import logoIcon from '@/assets/logo_icon.svg'
-import { linkService } from '@/services/api'
+import { linkService, useBackend } from '@/services/api'
+import { linkStorage } from '@/services/storage'
 import { LinkNotFound } from '@/components/link-not-found'
 
 export function LinkRedirect() {
@@ -21,6 +22,9 @@ export function LinkRedirect() {
 
   useEffect(() => {
     if (data?.originalUrl) {
+      if (!useBackend()) {
+        linkStorage.incrementAccessCount(data.id)
+      }
       window.location.href = data.originalUrl
     }
   }, [data])

@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useQueryClient } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { linkService } from '@/services/api'
@@ -28,6 +29,7 @@ const newLinkFormSchema = z.object({
 type NewLinkFormData = z.infer<typeof newLinkFormSchema>
 
 export function NewLinkForm() {
+  const queryClient = useQueryClient()
   const {
     register,
     handleSubmit,
@@ -55,6 +57,7 @@ export function NewLinkForm() {
     const result = await linkService.create(requestData)
 
     if (!result.errors) {
+      queryClient.invalidateQueries({ queryKey: ['links'] })
       reset()
     }
   }
